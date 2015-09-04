@@ -6,6 +6,8 @@
 package producerconsumer;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,11 +25,17 @@ public class Consumer implements Runnable {
     public Consumer(BlockingQueue<Long> in) {
         this.in = in;
     }
-    
-    public void run(){
-        long c;
-        while(true){
-           
+
+    public void run() {
+        Long c = null;
+        while (true) {
+            try {
+                c = (Long) in.take();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            sum += c;
+            System.out.println("Num: " + c);
         }
     }
 
