@@ -13,34 +13,34 @@ import java.util.logging.Logger;
  *
  * @author Jonas
  */
-public abstract class Producer implements Runnable {
+public class Producer implements Runnable {
 
-    private BlockingQueue<Long> in;
-    private BlockingQueue<Long> out;
+    private BlockingQueue<Long> BQin;
+    private BlockingQueue<Long> BQout;
 
-    public Producer(BlockingQueue<Long> in, BlockingQueue<Long> out) {
-        this.in = in;
-        this.out = out;
+    public Producer(BlockingQueue<Long> BQin, BlockingQueue<Long> BQout) {
+        this.BQin = BQin;
+        this.BQout = BQout;
 
     }
 
-    public void Run() {
+    public void run() {
         Long c;
 //when c is in the thread pool and NOT null
-        while ((c = in.poll()) != null) {
+        while ((c = BQin.poll()) != null) {
             try {
-                out.put(fibo(c));
+                BQout.put(fib(c));
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    private long fibo(long n) {
+    private long fib(long n) {
         if ((n == 0) || (n == 1)) {
             return n;
         } else {
-            return fibo(n - 1) + fibo(n - 2);
+            return fib(n - 1) + fib(n - 2);
         }
     }
 }
