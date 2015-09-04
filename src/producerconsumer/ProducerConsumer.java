@@ -11,8 +11,8 @@ import java.util.concurrent.BlockingQueue;
  */
 public class ProducerConsumer {
 
-    private static BlockingQueue<Long> BQin = new ArrayBlockingQueue<>(20);
-    private static BlockingQueue<Long> BQout = new ArrayBlockingQueue<>(20);
+    private static BlockingQueue<Long> BQin = new ArrayBlockingQueue<>(22);
+    private static BlockingQueue<Long> BQout = new ArrayBlockingQueue<>(22);
 
     public static void main(String[] args) throws InterruptedException {
         BQin.add((long) 4);
